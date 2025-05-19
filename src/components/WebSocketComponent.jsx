@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Children } from 'react';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
 function WebSocketComponent() {
-    const [receivedData, setReceivedData] = useState(null);
-    const stompClient = useRef(null); // 렌더링에 필요하지 않은 값
+    const [userActivityData, setUserActivityData] = useState([]);
+    const [orderStatusData, setOrderStatusData] = useState([]);
+    const stompClient = useRef(null); // 렌더링x
 
     useEffect(() => {
-        // WebSocket 엔드포인트 주소 (Spring WebSocketConfig에 설정한 addEndpoint)
+        // WebSocket endpoint
         const socketUrl = 'http://localhost:8080/ws-result';
         const socket = new SockJS(socketUrl);
 
@@ -27,7 +28,7 @@ function WebSocketComponent() {
             // 구독할 토픽 주소 (Spring WebSocketConfig에 설정한 enableSimpleBroker)
             stompClient.current.subscribe('/topic/user-activity', (message) => {
                 const body = JSON.parse(message.body);
-                setReceivedData(body);
+                setUserActivityData(body);
                 console.log('Received data:', body);
             });
 
@@ -53,13 +54,11 @@ function WebSocketComponent() {
     }, []); // 마운트 될 때만 실행
 
     return (
-        <div>
-            <h1>WebSocket Example</h1>
-            {receivedData && (
-                <pre>{JSON.stringify(receivedData, null, 2)}</pre>
+        <>
+            { React.Children.map(Children, (child) => 
+                React.cloneElement(child, { userActivityData, orderStatusData })
             )}
-            {!receivedData && <p>Waiting for data...</p>}
-        </div>
+        </>
     );
 }
 
