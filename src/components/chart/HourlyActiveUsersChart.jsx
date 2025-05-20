@@ -20,7 +20,7 @@ ChartJS.register(
 
 function HourlyActiveUsersChart(props) {
 
-    let chartData = props.userActivityData;
+    let chartData = props.hourlyUserData;
     // let chartData = {
     //     "labels": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], // 시간
     //     "datasets": [{
@@ -46,21 +46,21 @@ function HourlyActiveUsersChart(props) {
             },
             title: {
                 display: true,
-                text: 'Hourly Active Users', // 차트 제목 설정 (원하는 제목으로 변경 가능)
+                text: 'Hourly Active Users',
             },
-            },
-            scales: {
+        },
+        scales: {
             y: {
                 beginAtZero: true,
                 title: {
                     display: true,
-                    text: 'Number of Users', // Y축 레이블 설정 (원하는 레이블로 변경 가능)
+                    text: 'Number of Users',
                 },
             },
             x: {
                 title: {
                     display: true,
-                    text: 'Hour', // X축 레이블 설정 (원하는 레이블로 변경 가능)
+                    text: 'Hour',
                 },
             },
         },

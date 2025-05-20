@@ -1,9 +1,9 @@
-import Chart from "./components/Chart";
+import ChartComponent from "./components/ChartComponent";
 import './App.css'
 
 function App() {
     return (
-        <Chart/>
+        <ChartComponent/>
     )
 }
 
