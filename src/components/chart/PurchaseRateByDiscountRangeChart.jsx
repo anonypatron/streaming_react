@@ -4,7 +4,15 @@ import { Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function PurchaseRateByDiscountRangeChart(props) {
-    let chartData = props.PurchaseRateByDiscountRangeChart;
+    // let chartData = props.PurchaseRateByDiscountRangeChart;
+
+    let chartData = {
+        "labels": ["P0-1", "P1-10", "P10-20", "P20+"], // 시간
+        "datasets": [{
+            "label": "Purchase Rate By Discount Range",
+            "data": [0.012683, 0.019999, 0.014238, 0.013522] // 사용자 수
+        }]
+    };
 
     const data = {
             labels: chartData.labels,
@@ -27,7 +35,16 @@ function PurchaseRateByDiscountRangeChart(props) {
         })),
     };
     
-    return <Doughnut data={ data }/>
+    const options = {
+        plugins: {
+            title: {
+                display: true,
+                text: "할인율에 따른 구매율 증가"
+            },
+        }
+    };
+
+    return <Doughnut options={ options } data={ data }/>
 }
 
 export default PurchaseRateByDiscountRangeChart;

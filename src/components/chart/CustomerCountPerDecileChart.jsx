@@ -23,19 +23,28 @@ ChartJS.register(
 );
 
 function CustomerCountPerDecileChart(props) {
-    let chartData = props.CustomerCountPerDecileChart;
+    // let chartData = props.CustomerCountPerDecileChart;
+
+    let chartData = {
+        "labels": ["P0-10", "P10-20", "P20-30", "P30-40", "P40-50",
+             "P50-60", "P60-70", "P70-80", "P80-90", "P90-100"], // 시간
+        "datasets": [{
+            "label": "Customer Count Per Decile",
+            "data": [512, 731, 834, 923, 1012, 789, 602, 391, 195, 71] // 사용자 수
+        }]
+    };
 
     const options = {
         responsive: true,
         plugins: {
-            legend: {
-                position: 'top',
-            },
             title: {
                 display: true,
-                text: '사용자 구매 금액 백분위',
+                text: "사용자 구매 금액 백분위"
             },
-        },
+            legend: {
+                display: false
+            },
+        }
     };
 
     const data = {

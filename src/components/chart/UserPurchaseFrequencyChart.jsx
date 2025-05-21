@@ -8,7 +8,15 @@ ChartJS.register(
 );
 
 function UserPurchaseFrequencyChart(props) {
-    let chartData = props.UserPurchaseFrequencyChart;
+    // let chartData = props.UserPurchaseFrequencyChart;
+
+    let chartData = {
+        "labels": ["1회", "2-5회", "6-10회", "10회 이상"], // 시간
+        "datasets": [{
+            "label": "User Purchase Frequency",
+            "data": [200, 150, 43, 10] // 사용자 수
+        }]
+    };
 
     const data = {
             labels: chartData.labels,
@@ -31,7 +39,31 @@ function UserPurchaseFrequencyChart(props) {
         })),
     };
 
-    return <Pie data={ data }/>
+    // const options = {
+    //     responsive: true,
+    //     legend: {
+    //         position: 'top',
+    //     },
+    //     title: {
+    //         display: true,
+    //         text: 'Chart.js Doughnut Chart'
+    //     },
+    //     animation: {
+    //         animateScale: true,
+    //         animateRotate: true
+    //     }
+    // }
+
+    const options = {
+        plugins: {
+            title: {
+                display: true,
+                text: "사용자 구매 빈도 분포"
+            },
+        }
+    };
+
+    return <Pie options={ options } data={ data }/>
 }
 
 export default UserPurchaseFrequencyChart;

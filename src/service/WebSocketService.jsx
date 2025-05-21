@@ -9,11 +9,12 @@ function WebSocketComponent() {
     const [purchaseFrequency, setpurchaseFrequency] = useState([]);
     const [decileData, setDecileData] = useState([]);
     const [purchaseDiscount, setpurchaseDiscount] = useState([]);
-    const stompClient = useRef(null); // 렌더링x
+    const stompClient = useRef(null); // 값이 변해도 렌더링하지 않음
+
+    // WebSocket endpoint
+    const socketUrl = 'http://localhost:8080/ws-result';
 
     useEffect(() => {
-        // WebSocket endpoint
-        const socketUrl = 'http://localhost:8080/ws-result';
         const socket = new SockJS(socketUrl);
 
         stompClient.current = new Client({

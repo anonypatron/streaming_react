@@ -25,14 +25,15 @@ const ChartComponent = () => {
                 <button onClick={ () => handleViewChange('purchase_discount') }>할인율에 따른 구매율 증가</button>
             </div>
             {/* 위에서부터 horizontalBar, horizontalBar, VerticalBar, Pie, Area, Doughnut chart*/}
-            <WebSocketComponent>
-                { activeView == 'category_views' && <CategoryViewPerHourChart/> }
-                { activeView == 'brand_views' && <BrandViewPerHourChart/> }
-                { activeView == 'hourly_users' && <HourlyActiveUsersChart/> }
-                { activeView == 'purchase_frequency' && <UserPurchaseFrequencyChart/> }
-                { activeView == 'decile' && <CustomerCountPerDecileChart/> }
-                { activeView == 'purchase_discount' && <PurchaseRateByDiscountRangeChart/> }
-            </WebSocketComponent>
+            {/* <WebSocketComponent>
+                
+            </WebSocketComponent> */}
+            { activeView == 'category_views' && <CategoryViewPerHourChart/> }
+            { activeView == 'brand_views' && <BrandViewPerHourChart/> }
+            { activeView == 'hourly_users' && <HourlyActiveUsersChart/> }
+            { activeView == 'purchase_frequency' && <UserPurchaseFrequencyChart/> }
+            { activeView == 'decile' && <CustomerCountPerDecileChart/> }
+            { activeView == 'purchase_discount' && <PurchaseRateByDiscountRangeChart/> }
         </div>
     );
 };
