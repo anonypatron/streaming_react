@@ -2,13 +2,11 @@ import React, { useState, useEffect, useRef, Children } from 'react';
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 
-function WebSocketComponent() {
+function WebSocketComponent({ children }) {
     const [categoryViewsData, setCategoryViewsData] = useState([]);
     const [brandViewsData, setBrandViewsData] = useState([]);
     const [hourlyUserData, setHourlyUserData] = useState([]);
     const [purchaseFrequency, setpurchaseFrequency] = useState([]);
-    const [decileData, setDecileData] = useState([]);
-    const [purchaseDiscount, setpurchaseDiscount] = useState([]);
     const stompClient = useRef(null); // 값이 변해도 렌더링하지 않음
 
     // WebSocket endpoint
@@ -16,6 +14,7 @@ function WebSocketComponent() {
 
     useEffect(() => {
         const socket = new SockJS(socketUrl);
+        console.log('socket연결');
 
         stompClient.current = new Client({
             webSocketFactory: () => socket,
@@ -33,38 +32,42 @@ function WebSocketComponent() {
             // 1
             stompClient.current.subscribe('/topic/category_views', (message) => {
                 const body = JSON.parse(message.body);
+                console.log(body);
                 setCategoryViewsData(body);
             });
 
             // 2
             stompClient.current.subscribe('/topic/brand_views', (message) => {
                 const body = JSON.parse(message.body);
+                console.log(body);
                 setBrandViewsData(body);
             });
 
             // 3
             stompClient.current.subscribe('/topic/hourly_users', (message) => {
                 const body = JSON.parse(message.body);
+                console.log(body);
                 setHourlyUserData(body);
             });
 
             // 4
             stompClient.current.subscribe('/topic/purchase_frequency', (message) => {
                 const body = JSON.parse(message.body);
+                console.log(body);
                 setpurchaseFrequency(body);
             });
 
-            // 5
-            stompClient.current.subscribe('/topic/decile', (message) => {
-                const body = JSON.parse(message.body);
-                setDecileData(body);
-            });
+            // // 5
+            // stompClient.current.subscribe('/topic/decile', (message) => {
+            //     const body = JSON.parse(message.body);
+            //     setDecileData(body);
+            // });
 
             // 6
-            stompClient.current.subscribe('/topic/purchase_discount', (message) => {
-                const body = JSON.parse(message.body);
-                setpurchaseDiscount(body);
-            });
+            // stompClient.current.subscribe('/topic/purchase_discount', (message) => {
+            //     const body = JSON.parse(message.body);
+            //     setpurchaseDiscount(body);
+            // });
         };
 
         stompClient.current.onDisconnect = () => {
@@ -87,14 +90,12 @@ function WebSocketComponent() {
 
     return (
         <>
-            { React.Children.map(Children, (child) => 
+            { React.Children.map(children, (child) => 
                 React.cloneElement(child, { 
                     hourlyUserData, 
                     categoryViewsData,
                     brandViewsData,
                     purchaseFrequency,
-                    decileData,
-                    purchaseDiscount,
                 })
             )}
         </>

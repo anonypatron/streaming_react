@@ -19,15 +19,15 @@ ChartJS.register(
 );
 
 function BrandViewPerHourChart(props) {
-    // let chartData = props.CategoryViewPerHourChart;
+    let chartData = props.CategoryViewPerHourChart;
 
-    let chartData = {
-        "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-        "datasets": [{
-            "label": "Brand View Per Hour",
-            "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
-        }]
-    };
+    // let chartData = {
+    //     "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+    //     "datasets": [{
+    //         "label": "Brand View Per Hour",
+    //         "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
+    //     }]
+    // };
     
     const data = {
             labels: chartData.labels,

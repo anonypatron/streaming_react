@@ -19,15 +19,15 @@ ChartJS.register(
 );
 
 function CategoryViewPerHourChart(props) {
-    // let chartData = props.CategoryViewPerHourChart;
+    let chartData = props.CategoryViewPerHourChart;
     
-    let chartData = {
-        "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"], // 인기 카테고리
-        "datasets": [{
-            "label": "Category View Per Hour",
-            "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100] // 조회 수
-        }]
-    };
+    // let chartData = {
+    //     "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"], // 인기 카테고리
+    //     "datasets": [{
+    //         "label": "Category View Per Hour",
+    //         "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100] // 조회 수
+    //     }]
+    // };
 
     const data = {
             labels: chartData.labels,

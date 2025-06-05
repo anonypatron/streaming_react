@@ -8,15 +8,15 @@ ChartJS.register(
 );
 
 function UserPurchaseFrequencyChart(props) {
-    // let chartData = props.UserPurchaseFrequencyChart;
+    let chartData = props.UserPurchaseFrequencyChart;
 
-    let chartData = {
-        "labels": ["1회", "2-5회", "6-10회", "10회 이상"], // 시간
-        "datasets": [{
-            "label": "User Purchase Frequency",
-            "data": [200, 150, 43, 10] // 사용자 수
-        }]
-    };
+    // let chartData = {
+    //     "labels": ["1회", "2-5회", "6-10회", "10회 이상"], // 시간
+    //     "datasets": [{
+    //         "label": "User Purchase Frequency",
+    //         "data": [200, 150, 43, 10] // 사용자 수
+    //     }]
+    // };
 
     const data = {
             labels: chartData.labels,

@@ -19,15 +19,15 @@ ChartJS.register(
 );
 
 function HourlyActiveUsersChart(props) {
-    // let chartData = props.hourlyUserData;
+    let chartData = props.hourlyUserData;
 
-    let chartData = {
-        "labels": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], // 시간
-        "datasets": [{
-            "label": "Hourly Active Users",
-            "data": [123, 98, 56, 78, 110, 150, 180, 200, 220, 250, 280, 300, 320, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110] // 사용자 수
-        }]
-    };
+    // let chartData = {
+    //     "labels": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], // 시간
+    //     "datasets": [{
+    //         "label": "Hourly Active Users",
+    //         "data": [123, 98, 56, 78, 110, 150, 180, 200, 220, 250, 280, 300, 320, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110] // 사용자 수
+    //     }]
+    // };
 
     const data = {
             labels: chartData.labels,
