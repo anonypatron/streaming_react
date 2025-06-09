@@ -13,7 +13,8 @@ function WebSocketComponent({ children }) {
     const socketUrl = 'http://localhost:8080/ws-result';
 
     useEffect(() => {
-        const socket = new SockJS(socketUrl);
+        // const socket = new SockJS(socketUrl);
+        const socket = new WebSocket(socketUrl);
         console.log('socket연결');
 
         stompClient.current = new Client({
@@ -90,16 +91,19 @@ function WebSocketComponent({ children }) {
 
     return (
         <>
-            { React.Children.map(children, (child) => 
-                React.cloneElement(child, { 
-                    hourlyUserData, 
-                    categoryViewsData,
-                    brandViewsData,
-                    purchaseFrequency,
-                })
+            { React.Children.map(children, (child) =>
+                React.isValidElement(child)
+                    ? React.cloneElement(child, {
+                        hourlyUserData,
+                        categoryViewsData,
+                        brandViewsData,
+                        purchaseFrequency,
+                    })
+                    : child
             )}
         </>
     );
+    
 }
 
 export default WebSocketComponent;

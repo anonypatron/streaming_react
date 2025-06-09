@@ -19,8 +19,16 @@ ChartJS.register(
 );
 
 function BrandViewPerHourChart(props) {
-    let chartData = props.CategoryViewPerHourChart;
-
+    let chartData = props.brandViewsData;
+    
+    if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
+        return (
+            <div>
+                <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
+            </div>
+        );
+    }
+    
     // let chartData = {
     //     "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
     //     "datasets": [{

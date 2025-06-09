@@ -21,6 +21,14 @@ ChartJS.register(
 function HourlyActiveUsersChart(props) {
     let chartData = props.hourlyUserData;
 
+    if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
+        return (
+            <div>
+                <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
+            </div>
+        );
+    }
+    
     // let chartData = {
     //     "labels": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], // 시간
     //     "datasets": [{
