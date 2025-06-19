@@ -8,6 +8,7 @@ import {
     Tooltip,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import ChartTable from '../table/ChartTable';
 
 ChartJS.register(
   CategoryScale,
@@ -19,23 +20,28 @@ ChartJS.register(
 );
 
 function CategoryViewPerHourChart(props) {
-    let chartData = props.categoryViewsData;
+    // let chartData = props.categoryViewsData;
     
-    if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
-        return (
-            <div>
-                <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
-            </div>
-        );
-    }
+    // if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
+    //     return (
+    //         <div>
+    //             <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
+    //         </div>
+    //     );
+    // }
     
-    // let chartData = {
-    //     "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"], // 인기 카테고리
-    //     "datasets": [{
-    //         "label": "Category View Per Hour",
-    //         "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100] // 조회 수
-    //     }]
-    // };
+    let tableColumns = {
+        "thead": "카테고리명",
+        "tbody": "조회수",
+    };
+
+    let chartData = {
+        "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"], // 인기 카테고리
+        "datasets": [{
+            "label": "Category View Per Hour",
+            "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100] // 조회 수
+        }]
+    };
 
     const data = {
             labels: chartData.labels,
@@ -84,7 +90,12 @@ function CategoryViewPerHourChart(props) {
         }
     };
 
-    return <Bar options={ options } data={ data }/>
+    return (
+        <div>
+            <Bar options={ options } data={ data }/>
+            <ChartTable tableColumns={ tableColumns } chartData={ chartData }/>
+        </div>
+    )
 }
 
 export default CategoryViewPerHourChart;

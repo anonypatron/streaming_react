@@ -1,5 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import ChartTable from '../table/ChartTable';
 
 ChartJS.register(
     ArcElement, 
@@ -8,23 +9,27 @@ ChartJS.register(
 );
 
 function UserPurchaseFrequencyChart(props) {
-    let chartData = props.purchaseFrequency;
+    // let chartData = props.purchaseFrequency;
 
-    if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
-        return (
-            <div>
-                <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
-            </div>
-        );
-    }
+    // if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
+    //     return (
+    //         <div>
+    //             <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
+    //         </div>
+    //     );
+    // }
     
-    // let chartData = {
-    //     "labels": ["1회", "2-5회", "6-10회", "10회 이상"], // 시간
-    //     "datasets": [{
-    //         "label": "User Purchase Frequency",
-    //         "data": [200, 150, 43, 10] // 사용자 수
-    //     }]
-    // };
+    let tableColumns = {
+        "thead": "구매횟수",
+        "tbody": "사용자 수",
+    };
+    let chartData = {
+        "labels": ["1회", "2-5회", "6-10회", "10회 이상"], // 시간
+        "datasets": [{
+            "label": "User Purchase Frequency",
+            "data": [200, 150, 43, 10] // 사용자 수
+        }]
+    };
 
     const data = {
             labels: chartData.labels,
@@ -71,7 +76,12 @@ function UserPurchaseFrequencyChart(props) {
         }
     };
 
-    return <Pie options={ options } data={ data }/>
+    return (
+        <div>
+            <Pie options={ options } data={ data }/>
+            <ChartTable tableColumns={ tableColumns } chartData={ chartData }/>
+        </div>
+    )
 }
 
 export default UserPurchaseFrequencyChart;

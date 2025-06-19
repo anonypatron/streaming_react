@@ -8,6 +8,7 @@ import {
     Tooltip,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import ChartTable from '../table/ChartTable';
 
 ChartJS.register(
     CategoryScale,
@@ -19,23 +20,27 @@ ChartJS.register(
 );
 
 function HourlyActiveUsersChart(props) {
-    let chartData = props.hourlyUserData;
+    // let chartData = props.hourlyUserData;
 
-    if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
-        return (
-            <div>
-                <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
-            </div>
-        );
-    }
+    // if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
+    //     return (
+    //         <div>
+    //             <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
+    //         </div>
+    //     );
+    // }
     
-    // let chartData = {
-    //     "labels": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], // 시간
-    //     "datasets": [{
-    //         "label": "Hourly Active Users",
-    //         "data": [123, 98, 56, 78, 110, 150, 180, 200, 220, 250, 280, 300, 320, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110] // 사용자 수
-    //     }]
-    // };
+    let tableColumns = {
+        "thead": "시간",
+        "tbody": "활동자 수",
+    };
+    let chartData = {
+        "labels": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], // 시간
+        "datasets": [{
+            "label": "Hourly Active Users",
+            "data": [123, 98, 56, 78, 110, 150, 180, 200, 220, 250, 280, 300, 320, 310, 290, 270, 250, 230, 210, 190, 170, 150, 130, 110] // 사용자 수
+        }]
+    };
 
     const data = {
             labels: chartData.labels,
@@ -110,35 +115,13 @@ function HourlyActiveUsersChart(props) {
             },
         }
     };
-    // const options = {
-    //     responsive: false,
-    //     plugins: {
-    //         legend: {
-    //             position: "top",
-    //         },
-    //         title: {
-    //             display: true,
-    //             text: 'Hourly Active Users',
-    //         },
-    //     },
-    //     scales: {
-    //         y: {
-    //             beginAtZero: true,
-    //             title: {
-    //                 display: true,
-    //                 text: 'Number of Users',
-    //             },
-    //         },
-    //         x: {
-    //             title: {
-    //                 display: true,
-    //                 text: 'Hour',
-    //             },
-    //         },
-    //     },
-    // };
 
-    return <Bar options={ options } data={ data }/>;
+    return (
+        <div>
+            <Bar options={ options } data={ data }/>
+            <ChartTable tableColumns={ tableColumns } chartData={ chartData }/>
+        </div>
+    )
 }
 
 export default HourlyActiveUsersChart;

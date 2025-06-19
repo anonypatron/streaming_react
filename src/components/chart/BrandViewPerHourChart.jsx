@@ -8,6 +8,7 @@ import {
     Tooltip,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import ChartTable from '../table/ChartTable';
 
 ChartJS.register(
   CategoryScale,
@@ -19,23 +20,27 @@ ChartJS.register(
 );
 
 function BrandViewPerHourChart(props) {
-    let chartData = props.brandViewsData;
+    // let chartData = props.brandViewsData;
     
-    if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
-        return (
-            <div>
-                <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
-            </div>
-        );
-    }
-    
-    // let chartData = {
-    //     "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-    //     "datasets": [{
-    //         "label": "Brand View Per Hour",
-    //         "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
-    //     }]
-    // };
+    // if (!chartData || !chartData.labels || !chartData.datasets || chartData.datasets.length === 0) {
+    //     return (
+    //         <div>
+    //             <p>데이터 로딩 중입니다. 잠시만 기다려주세요.</p>
+    //         </div>
+    //     );
+    // }
+    let tableColumns = {
+        "thead": "브랜드명",
+        "tbody": "조회수",
+    };
+
+    let chartData = {
+        "labels": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+        "datasets": [{
+            "label": "Brand View Per Hour",
+            "data": [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100]
+        }]
+    };
     
     const data = {
             labels: chartData.labels,
@@ -78,12 +83,22 @@ function BrandViewPerHourChart(props) {
                 text: "실시간 인기 브랜드(view)"
             },
             legend: {
-                display: false
+                display: false,
+                labels: {
+                    font: {
+                        size: 14
+                    }
+                }
             },
         }
     };
 
-    return <Bar options={ options } data={ data }/>
+    return (
+        <div>
+            <Bar options={ options } data={ data }/>
+            <ChartTable tableColumns={ tableColumns } chartData={ chartData }/>
+        </div>
+    )
 }
 
 export default BrandViewPerHourChart;
