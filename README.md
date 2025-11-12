@@ -38,13 +38,6 @@
 
 ---
 
-- 시스템 아키텍처(이미지) 🧩
-    
-    ![시스템 구성도.png](attachment:65d23491-1208-40b1-a3a3-1f915e85fb3f:시스템_구성도.png)
-    
-
----
-
 - 아키텍처 특징(파이프 라인)
     
     실시간으로 데이터베이스에 들어오는 로그 데이터의 변경을 감지(CDC)하여 Kafka topic으로 전달, Kafka streams를 이용한 통계 후 다시 Kafka topic으로 전달, websocket을 이용해 Kafka streams와 front를 연결, 데이터 송수신. front에서는 차트와 표를 보여줌.
