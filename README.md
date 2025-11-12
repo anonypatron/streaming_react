@@ -1,8 +1,57 @@
-# React + Vite
+📊 스트리밍 데이터 처리 : 로그데이터를 활용한 통계 자동화
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- 프로젝트 개요(정의 + 목표)
+    
+    실시간 데이터 처리의 중요성이 높아짐에 따라 데이터 스트리밍 시스템을 구축함.
+    
+    실시간으로 들어오는 로그 데이터를 처리하기 위해 파이프라인 아키텍처 설계 및 데이터 플로우 생성 및 관리 능력 향상
+    
+- 개발 기간 : 25.04.22~25.06.27
+- 개발 인원 : 2인
+- 기술 스택
+    - 분산시스템 및 메시징
+        
+        Zookeeper 3.4.6
+        
+        Kafka 3.3.3
+        
+    - 프로그래밍 언어
+        
+        Java 21
+        
+        Javascript
+        
+    - 프레임워크
+        
+        Spring boot 3.4.3
+        
+        React 19.0.0
+        
+    - 데이터베이스
+        
+        Mysql 8.0
+        
+    - 인프라, 협업 툴, 기타
+        - Debezium 2.6
+        - Docker client 28.1.1
+        - Slack, Git, Github
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 시스템 아키텍처(이미지) 🧩
+    
+    ![시스템 구성도.png](attachment:65d23491-1208-40b1-a3a3-1f915e85fb3f:시스템_구성도.png)
+    
+
+---
+
+- 아키텍처 특징(파이프 라인)
+    
+    실시간으로 데이터베이스에 들어오는 로그 데이터의 변경을 감지(CDC)하여 Kafka topic으로 전달, Kafka streams를 이용한 통계 후 다시 Kafka topic으로 전달, websocket을 이용해 Kafka streams와 front를 연결, 데이터 송수신. front에서는 차트와 표를 보여줌.
+    
+    데이터를 삽입하는 부분, 데이터 변경을 감지하는 부분, kafka topic에서 필터링(streams)하는 부분, kafka와 websocket을 연결하는 부분, 웹에 통계를 보여주는 부분으로 나누어 진행함.
+    
+    이와 같이 아키텍처를 구성하면 각 서비스마다 다른 언어를 사용해도 가능하다. 단, 파이프라인이 연결되어 있어 중간의 서비스가 다운이 되면 전체적인 서비스가 동작하지 않을 수 있음, 하지만 MQ(Kafka)에 메시지가 저장되어 있으므로 오프셋이 저장되어 있어 다시 복구 가능함. 유지보수에 장점을 가지고 있는 아키텍처.
+    
+    ** 로그데이터는 실제로 구현하지 않으며 Kaggle에 있는 데이터 셋(Ecommerce log data)을 활용함 **
+  Notion : https://www.notion.so/2114aec03292802d993fcbd8aef87916
