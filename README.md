@@ -48,4 +48,3 @@
     
     ** 로그데이터는 실제로 구현하지 않으며 Kaggle에 있는 데이터 셋(Ecommerce log data)을 활용함 **
   
-  Notion : https://www.notion.so/2114aec03292802d993fcbd8aef87916
